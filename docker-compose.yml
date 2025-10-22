@@ -1,0 +1,16 @@
+services:
+  mav-vaganyzar-bot:
+    image: python:3.12-slim
+    container_name: vaganyzar-bot
+    environment:
+      - DISCORD_WEBHOOK=https://discord.com/api/webhooks/XXXX/YYYY
+      - CHECK_INTERVAL=3600
+      - DATA_PATH=/data
+    volumes:
+      - ./data:/data
+      - ./mav_vaganyzar_discord.py:/app/mav_vaganyzar_discord.py:ro
+    working_dir: /app
+    command: >
+      sh -c "pip install requests beautifulsoup4 &&
+             python mav_vaganyzar_discord.py"
+    restart: always
